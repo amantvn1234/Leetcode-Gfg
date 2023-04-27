@@ -22,19 +22,18 @@ public:
 //         ans=max(ans,lis(i,nums));
 //         return ans;
 //     }
-int dp[2500]; // 0 based indexing
+int dp[2501]; // 1 based indexing
 int lengthOfLIS(vector<int> &nums){
-int ans,an=0,n=nums.size(); // if no other element found
-for(int i=0;i<n;i++){
-    ans=1;
-    for(int j=0;j<i;j++){
-        if(nums[j]<nums[i])
-        ans=max(ans,dp[j]+1); // for accesing lis before this element which end at index j where that element is smaller
+int ans=0,n=nums.size(); // if no other element found
+for(int i=1;i<=n;i++){
+    dp[i]=1;
+    for(int j=1;j<i;j++){
+        if(nums[j-1]<nums[i-1])
+        dp[i]=max(dp[i],dp[j]+1); // for accesing lis before this element which end at index j where that element is smaller
     }
-    dp[i]=ans;
-    an=max(ans,an);
+    ans=max(ans,dp[i]);
     
 }
-return an;
+return ans;
 }
 };
