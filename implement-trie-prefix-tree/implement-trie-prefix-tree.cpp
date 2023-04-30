@@ -1,5 +1,3 @@
-class Trie {
-public:
 class node{ public:
     vector<node*> child;
     int prefixcount;
@@ -11,6 +9,10 @@ class node{ public:
         endofword=false;
     }
 };
+
+class Trie {
+public:
+
 
     node *root;
     Trie() {
@@ -48,11 +50,11 @@ class node{ public:
         for(int i=0;i<prefix.size();i++){
             int idx=prefix[i]-'a';
             if(curr->child[idx]==NULL){
-                return false;
+                return false;     // if path not exist then this prefix cannot be present
             }
            curr=curr->child[idx];
         }
-        return true;
+        return true;  // all element present so it can be prefix
     }
 };
 
