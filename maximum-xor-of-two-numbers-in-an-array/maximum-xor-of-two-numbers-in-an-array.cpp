@@ -31,8 +31,14 @@ return maxi_xor_for_num(val,r->child[bit],level-1);
     int findMaximumXOR(vector<int>& nums) {
       node* root=new node(); 
       int ans=0; 
+    // for(int i=0;i<nums.size();i++){
+    //     insert(nums[i],root);
+    //     ans=max(ans,maxi_xor_for_num(nums[i],root,30));
+    // }
     for(int i=0;i<nums.size();i++){
         insert(nums[i],root);
+            }
+    for(int i=0;i<nums.size();i++){
         ans=max(ans,maxi_xor_for_num(nums[i],root,30));
     }
     return ans;
