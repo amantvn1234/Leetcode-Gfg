@@ -1,12 +1,13 @@
 class Solution {
 public:
-struct Local {
-    Local(int paramA) { this->paramA = paramA; }
+class Local {
+    public:
+    Local(int k) { this->k = k; }
     bool operator ()(vector<int>&i, vector<int>& j) {
-        return i[paramA]>j[paramA];
+        return i[k]>j[k];
      }
 
-   int paramA;
+   int k;
 };
     vector<vector<int>> sortTheStudents(vector<vector<int>>& score, int k) {
         sort(score.begin(),score.end(),Local(k));
