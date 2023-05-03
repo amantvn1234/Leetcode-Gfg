@@ -6,16 +6,15 @@ public:
            freq[nums[i]]++;
        }
        vector<int> ans;
+       int miss;
        for(int i=1;i<=nums.size();i++){
-           if(freq[i]==2){ans.push_back(i);break;}
-           
+           if(freq[i]==2){ans.push_back(i);
+           }
+           else if(freq[i]==0){
+            miss=i;
             }
-
-            for(int i=1;i<=nums.size();i++){
-           if(freq[i]==0){
-           ans.push_back(i);
-           break;}
-            }
+       }
+           ans.push_back(miss); 
        return ans;
     }
 };
