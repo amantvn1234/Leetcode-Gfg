@@ -11,10 +11,10 @@
  */
 class Solution {
 public:
-void pathhelper(vector<vector<int>>&allpath,vector<int>onepath,TreeNode*root){
+void pathhelper(vector<string>&allpath,string onepath,TreeNode*root){
      if(root==0)   // base case
      return;
-     onepath.push_back(root->val);  // onepath giving root to current node path
+     onepath.push_back(root->val+'0');  // onepath giving root to current node path
 
     if(root->left==0&&root->right==0){  // base case
         allpath.push_back(onepath);
@@ -24,16 +24,12 @@ void pathhelper(vector<vector<int>>&allpath,vector<int>onepath,TreeNode*root){
     pathhelper(allpath,onepath,root->right);
  }
     int sumNumbers(TreeNode* root) {
-        vector<vector<int>> paths;
-        vector<int> apath;
+        vector<string> paths;
+        string apath;
         pathhelper(paths,apath,root);
         int allpathsum=0;
         for(int i=0;i<paths.size();i++){
-            int val=0;
-            for(int j=0;j<paths[i].size();j++){
-                val=val*10+paths[i][j];
-            }
-            allpathsum+=val;
+            allpathsum+=stoi(paths[i]);
         }
         return allpathsum;
     }
