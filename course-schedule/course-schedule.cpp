@@ -1,5 +1,5 @@
 class Solution {
-public:
+public:  // here p2c means possible to complete
     bool p2c(int node,vector<vector<int>>& adj,vector<bool> &visited,vector<bool> &dfsvisited){
         visited[node]=true;
         dfsvisited[node]=true;
@@ -21,9 +21,7 @@ public:
        vector<vector<int>> adj(numcourses);
        for(int i=0;i<prerequisites.size();i++){
            int u=prerequisites[i][0],v=prerequisites[i][1];
-           if(u==v)
-           return false;
-           adj[v].push_back(u);
+          adj[v].push_back(u);
        }
        vector<bool> visited(numcourses),dfsvisited(numcourses);
         for(int i=0;i<numcourses;i++){
