@@ -25,15 +25,14 @@ public:
         if(k==0)
         return head;
         else{
-           int count=size-k;
-           ListNode* ptr=head,*prev=0;
+           int count=size-k-1;
+           ListNode* ptr=head;
            while(count--){
-               prev=ptr;
                ptr=ptr->next;
            }
            end->next=head;
-          head=prev->next;
-          prev->next=0;
+          head=ptr->next;
+          ptr->next=0;
         }
         return head;
     }
