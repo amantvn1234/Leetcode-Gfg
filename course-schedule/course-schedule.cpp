@@ -1,36 +1,31 @@
 class Solution {
-public:  // here p2c means possible to complete
-    bool p2c(int node,vector<vector<int>>& adj,vector<bool> &visited,vector<bool> &dfsvisited){
-        visited[node]=true;
-        dfsvisited[node]=true;
-        for(auto ngb:adj[node]){
-            if(!visited[ngb]){
-                 if(p2c(ngb,adj,visited,dfsvisited)==false)  //false means cycle mil gyi so not possible to complete
-                 return false;
-            }
-            else{  // ngb already visited and iski dfs call bhi ho rkhi h
-                if(dfsvisited[ngb]==true){
-                    return false;  // cycle mil gyi so not possible to complete
-                }
+public:
+    bool canFinish(int n, vector<vector<int>>& p) {
+        vector<int> toposort;
+        vector<int> indegree(n,0);
+        vector<vector<int>> adj(n);
+
+        for(int i=0;i<p.size();i++){
+            int v=p[i][0],u=p[i][1];
+            adj[u].push_back(v); // creating adj list
+            indegree[v]++;
+        }
+        queue<int> q;
+        for(int i=0;i<n;i++){
+            if(indegree[i]==0)
+            q.push(i);
+        }
+        while(q.size()){
+            int front=q.front();
+            q.pop();
+            toposort.push_back(front);
+            for(auto ngb:adj[front]){
+                if(--indegree[ngb]==0)
+                q.push(ngb);
             }
         }
-        dfsvisited[node]=false;  // just before returning dfs call
-        return true; // es node ke neighbours me cycle na h so possible to complete
-    }
-    bool canFinish(int numcourses, vector<vector<int>>& prerequisites) {
-       vector<vector<int>> adj(numcourses);
-       for(int i=0;i<prerequisites.size();i++){
-           int u=prerequisites[i][0],v=prerequisites[i][1];
-          adj[v].push_back(u);
-       }
-       vector<bool> visited(numcourses),dfsvisited(numcourses);
-        for(int i=0;i<numcourses;i++){
-            if(!visited[i]){
-                bool p2complete=p2c(i,adj,visited,dfsvisited);
-                if(p2complete==false)
-                return false;
-            }
-        }
-        return true;
+        if(toposort.size()==n)
+       return true;
+       return false;
     }
 };
