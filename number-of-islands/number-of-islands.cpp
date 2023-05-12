@@ -7,7 +7,7 @@ public:
         return false;
     }
 
-    void bfs(vector<vector<bool>> & visited,int i,int j,vector<vector<char>> &grid){
+    void bfs(vector<vector<bool>> & visited,int &i,int &j,vector<vector<char>> &grid){
         queue<pair<int,int>> q;
         q.push({i,j});
         visited[i][j]=true;
