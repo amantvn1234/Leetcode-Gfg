@@ -11,27 +11,18 @@
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
-        ListNode* tmp=head;
-        int totalcnt=0,localcnt=1;
-        while(tmp){
-            totalcnt++;
-            tmp=tmp->next;
-        }
-        int delnode=totalcnt-n+1;
-        if(delnode==1)
-        {
-            head=head->next;
-        }
-        else{
-            ListNode* prev,*current=head;
-            while(localcnt<delnode){
-                prev=current;
-                current=current->next;
-                localcnt++;
-            }
-            prev->next=current->next;
-            delete(current);
-        }
-        return head;
+        ListNode* fast=head,*slow=head;
+     
+     for(int i=1;i<=n;i++)
+     fast=fast->next;
+
+     if(fast==NULL) return head->next; // as we need to del n==length node which is head and hm head ke pahle koe node rkh nhi sakte jisse hm slow->next=slow->next->next  kr den
+     while(fast->next){
+         slow=slow->next;
+         fast=fast->next;
+     }   // by this while loop hmne slow ko jo node del karna usse pahle rkh diye hain
+     slow->next=slow->next->next;
+     return head;
+
     }
 };
