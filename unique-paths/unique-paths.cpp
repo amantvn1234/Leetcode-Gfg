@@ -1,15 +1,19 @@
 class Solution {
 public:
-     int dp[101][101];
-    int up(int m,int n){
-         if(m==1||n==1)
-         return 1;
-        if(dp[m][n]!=-1)
-        return dp[m][n];
-       return dp[m][n]= up(m,n-1)+up(m-1,n); 
+    vector<vector<int>> dp; 
+    int up(int i,int j,int m,int n){
+        if(i==m-1&&j==n-1)
+        return 1;
+        if(i>=m||j>=n)
+        return 0;
+
+        if(dp[i][j]!=-1)
+        return dp[i][j];
+        
+        return dp[i][j]=up(i+1,j,m,n)+up(i,j+1,m,n);
     }
     int uniquePaths(int m, int n) {
-         memset(dp,-1,sizeof(dp));
-       return up(m,n);
+        dp.resize(m,vector<int>(n,-1));
+        return up(0,0,m,n);
     }
 };
