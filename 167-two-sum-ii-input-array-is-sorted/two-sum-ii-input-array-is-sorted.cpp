@@ -1,15 +1,21 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& numbers, int target) {
-        map<int,int> m; // stores index of a no.s
-        int n=numbers.size();
-        for(int i=0;i<n;i++){
-            if(m.find(target-numbers[i])!=m.end()){ // finding if its complement exists
-                return {m[target-numbers[i]]+1,i+1};
+        int st=0,end=numbers.size()-1;
+        while(st<end){
+            if(numbers[st]+numbers[end]==target)
+            {
+                return {st+1,end+1};
             }
-            m[numbers[i]]=i;
-
+            else if(numbers[st]+numbers[end]<target){
+                st++;
+            }
+            else{
+                end--;
+            }
         }
         return {0,0};
+
+        //tc:O(n) as two pointer  sc:O(1)
     }
 };
