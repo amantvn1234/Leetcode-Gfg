@@ -1,0 +1,1 @@
+<h2>two-sum-ii-input-array-is-sorted Notes</h2><hr>tc: O(nlogn)  as logn is taken by the map to search elements  : sc:O(n) by the map
