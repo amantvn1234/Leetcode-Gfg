@@ -3,7 +3,7 @@ public:
     bool ispossible(vector<int>&dist,int speed,double hour){
         double time=0;
         for(int i=0;i<dist.size()-1;i++){
-            time+=(dist[i]/speed+(dist[i]%speed!=0));
+            time+=ceil((float)dist[i]/speed);
         }
         time+=(double)dist[dist.size()-1]/speed;
         return time<=hour;
