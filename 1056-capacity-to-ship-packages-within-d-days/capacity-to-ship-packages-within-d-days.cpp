@@ -31,6 +31,8 @@ public:
                 min=mid+1;
             }
         }
-        return ans;
+        return ans;//
+
+        // tc:O(nlogn)    sc:O(1)
     }
 };
