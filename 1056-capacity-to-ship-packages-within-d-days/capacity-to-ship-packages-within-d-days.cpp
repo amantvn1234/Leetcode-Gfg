@@ -17,7 +17,7 @@ public:
 
   }
     int shipWithinDays(vector<int>& w, int days) {
-        int min=*max_element(w.begin(),w.end()),max=1e9,ans;
+        int min=*max_element(w.begin(),w.end()),max=accumulate(w.begin(),w.end(),0),ans;
 
         // apply binary search on ans (which is minimum weight possible)
 
