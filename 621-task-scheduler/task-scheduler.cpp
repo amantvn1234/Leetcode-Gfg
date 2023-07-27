@@ -1,41 +1,28 @@
 class Solution {
 public:
     int leastInterval(vector<char>& tasks, int n) {
-        vector<int> v(26,0);
-        priority_queue<int> pq;
-
+        vector<int> freq(26,0);
         for(int i=0;i<tasks.size();i++){
-            v[tasks[i]-'A']++;
+            freq[tasks[i]-'A']++;
         }
+        int maxfreq=0;
         for(int i=0;i<26;i++){
-            if(v[i]){
-                pq.push(v[i]);
+            maxfreq=max(maxfreq,freq[i]);
             }
-        }
-
-        // priority queue has now freq of all elements
-        int timer =0;
-        queue<pair<int,int>> wq;   //waiting queue <activation_time,freq>
-
-        while(pq.size()||wq.size()){// if any of them is not empty
-            timer++;
-            if(pq.size()){
-                int freq=pq.top();
-                if(--freq)
-                wq.push({timer+n,freq});   // inserting in wq with timing to get activated
-                pq.pop();
-            }
-
-            if(wq.size()){
-                if(timer==wq.front().first){
-                    pq.push(wq.front().second);
-                    wq.pop();
+        int idle=(maxfreq-1)*n;
+        bool maxi=true;
+        for(int i=0;i<26;i++){
+            if(freq[i]){
+                if(maxi&&freq[i]==maxfreq){
+                    maxi=false;
+                }
+                else{
+                    idle-=min(freq[i],maxfreq-1);
                 }
             }
-
         }
+        return tasks.size()+max(0,idle);
 
-        return timer;
-
+        // tc: O(n) sc: O(26)
     }
 };
