@@ -10,29 +10,29 @@ public:
        int ans=0;
 
        for(auto m:reservedrow){
-           unordered_map<int,int>r;
-           for(int i=0;i<m.second.size();i++){
-               r[m.second[i]]++;
+           
+           vector<int> v=m.second;
+         bool left=true,middle=true,right=true;  //true means free
+           for(int i=0;i<v.size();i++){
+               if(v[i]>=2&&v[i]<=5){
+                   left=false;
+               }
+               if(v[i]>=4&&v[i]<=7)
+               {
+                   middle=false;
+               }
+               if(v[i]>=6&&v[i]<=9){
+                   right=false;
+               }
            }
 
-           // left seat
-           if(r[2]||r[3]||r[4]||r[5]){// left not available 
-             if(!(r[4]||r[5]||r[6]||r[7])){ // check if  middle  available
-                ans++;
-             }
-             else{ // check if middle is not available check if left is availble take it
-               if(!(r[6]||r[7]||r[8]||r[9])){
-                ans++;
-             }
-             }
+           if(left==true&&right==true){
+               ans+=2;
            }
-           else{ // left available take it and check for right
-             ans++;
-            if(!(r[6]||r[7]||r[8]||r[9])){
-                ans++;
-             }
+           else if(left==true||right==true||middle==true){
+               ans+=1;
            }
-
+           
           
        }
         ans+=(n-reservedrow.size())*2;
