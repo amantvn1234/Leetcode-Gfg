@@ -2,7 +2,7 @@ class Solution {
 public:
      
      void combinations(vector<int>& candidates,int t,int i,vector<int> comb,vector<vector<int>> &ans){
-      if(i==candidates.size()){
+      if(i==candidates.size()||candidates[i]>t){
           if(t==0)
              ans.push_back(comb);
         return ;
@@ -20,6 +20,7 @@ public:
 
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
         vector<vector<int> > ans;
+        sort(candidates.begin(),candidates.end());
         vector<int> comb;
         combinations(candidates,target,0,comb,ans);
         return ans;
