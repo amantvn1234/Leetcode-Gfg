@@ -40,5 +40,6 @@ public:
             return bs(nums,pivotindex,n-1,target);
         }
        return -1;
+       // O(logn)
     }
 };
