@@ -2,30 +2,27 @@ class Solution {
 public:
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
         vector<int> ans;
-        set<int> s;
-        unordered_map<int,int> m;
-        for(int i=0;i<k;i++){
-            s.insert(nums[i]);
-            m[nums[i]]++;
+        deque<int> dq;
+        int n=nums.size();
+
+        for(int i=0;i<n;i++){
+            if(!dq.empty()&&dq.front()==i-k){  // check if front element is not in window remove it
+                dq.pop_front();
+            }
+            // remove all the elements less than or equal to current element as they can't contribute in any window in present and future also
+           
+           while(!dq.empty()&&nums[i]>=nums[dq.back()]){    // this is done to create monotonic decreasing queue
+               dq.pop_back();
+           }
+           dq.push_back(i);
+
+           if(i>=k-1){
+               ans.push_back(nums[dq.front()]);
+           }
         }
-        auto it=s.end();
-        it--;
-        ans.push_back(*it);
-         
-         int n=nums.size();
+        return ans;
 
-         for(int i=k;i<n;i++){
-              s.insert(nums[i]);
-               m[nums[i]]++;
-               if(--m[nums[i-k]]==0){
-                   s.erase(nums[i-k]);
-               }
-                auto it=s.end();
-                it--;
-                ans.push_back(*it);
-         }
-      
-       return ans;
-
+        // TC: O(2*n)  each element inserted ones and removed ones
+        // SC: O(k)    as dequeue can have atmost k elements
     }
 };
